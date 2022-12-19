@@ -1,0 +1,70 @@
+@import './resets';
+@import './variables';
+//function
+@function weight($weidht-name){
+    @return map-get($font-weights,$weidht-name);
+}
+//mixin
+@mixin flexCenter($direction){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: $direction;
+}
+
+@mixin theme($light-theme: true){
+    @if $light-theme{//true
+    background:   lighten($primary-color,100%);
+    color:        darken($text-color,100%);
+    }
+}
+
+//media query
+@mixin mobile{
+    @media(max-width:$mobile-size){
+        @content;
+    }
+} 
+
+body{
+    
+    background-color:$primary-color;
+    color:$text-color 
+}
+
+//nesting
+.main{
+
+@include flexCenter(row);
+// calc(80% - 400px) use this in css => but in sass cannot need calc and two para should be the same type two in % or two in px...
+    width  : 80% - 40%;
+    margin : 0 auto;
+
+    #{&}_paragraph1{
+        font-weight: weight(bold);
+        &:hover{
+            color: pink;
+        }
+    }
+ //inheritance
+    #{&}_paragraph2 {
+
+        @extend .main_paragraph1;
+
+        //add some style
+        color: $accent-color;
+    }
+
+
+
+
+    @include mobile{
+        flex-direction:column ;
+    }
+}
+ // & = to parent (.main)
+ // {#} = interpolation  we want every thing before main_paragraph
+ .light{
+    @include theme($light-theme:true);
+    //if i changed in false => back=gray
+ }
