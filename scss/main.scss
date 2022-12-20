@@ -1,70 +1,123 @@
 @import './resets';
 @import './variables';
 //function
-@function weight($weidht-name){
-    @return map-get($font-weights,$weidht-name);
-}
-//mixin
-@mixin flexCenter($direction){
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: $direction;
-}
+// @function weight($weidht-name){
+//     @return map-get($font-weights,$weidht-name);
+// }
+// //mixin
+// @mixin flexCenter($direction){
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     flex-direction: $direction;
+// }
 
-@mixin theme($light-theme: true){
-    @if $light-theme{//true
-    background:   lighten($primary-color,100%);
-    color:        darken($text-color,100%);
-    }
-}
+// @mixin theme($light-theme: true){
+//     @if $light-theme{//true
+//     background:   lighten($primary-color,100%);
+//     color:        darken($text-color,100%);
+//     }
+// }
 
-//media query
-@mixin mobile{
-    @media(max-width:$mobile-size){
-        @content;
-    }
-} 
+// //media query
+// @mixin mobile{
+//     @media(max-width:$mobile-size){
+//         @content;
+//     }
+// } 
 
-body{
+// body{
     
-    background-color:$primary-color;
-    color:$text-color 
+//     background-color:$primary-color;
+//     color:$text-color 
+// }
+
+// //nesting
+// .main{
+
+// @include flexCenter(row);
+// // calc(80% - 400px) use this in css => but in sass cannot need calc and two para should be the same type two in % or two in px...
+//     width  : 80% - 40%;
+//     margin : 0 auto;
+// @include flexCenter(column);
+//     #{&}_paragraph1{
+//        color: red;
+//     }
+
+//     #{&}_paragraph2 {
+
+//        color: green;
+//     }
+//     #{&}_paragraph3 {
+
+//         color: rgb(0, 32, 128);
+//      }
+//      #{&}_paragraph4 {
+
+//         color: rgb(210, 156, 85);
+//      }
+//      #{&}_paragraph5 {
+
+//         color: rgb(233, 67, 227);
+//      }
+// //use for loop
+// @for $i from 1 through 5{ //1,2,3,4,5 if we  use 1 to 5  =>1,2,3,4 not include 5
+
+//     #{&}_paragraph#{$i}{ 
+//         //interpolation # {} convert the variable to the value
+
+// font-size: $i*0.5rem;
+// background-color: darken( rgb(7, 212, 58), $i*10%);
+//     }
+// }
+
+
+
+//     @include mobile{
+//         flex-direction:column ;
+//     }
+// }
+//  // & = to parent (.main)
+//  // {#} = interpolation  we want every thing before main_paragraph
+//  .light{
+//     @include theme($light-theme:true);
+//     //if i changed in false => back=gray
+//  }
+@mixin big($size:2rem,$up:null){
+    font-size: $size;
+   @if $up==null{
+    transform: rotate(2deg);
+   }
+   @else if $up==true{
+    transform: rotate(180deg);
+   }@else{
+    transform: rotate(0deg);
+   }
+      
+       
+
+ 
+}
+html{
+    font-size: 16px;
+    line-height: 1.7;
+    font-family: 'Courier New', Courier, monospace;
+}
+body{
+    padding: 2rem;
+}
+// @for $i from 1 to 4{
+//     .p#{$i}{
+//         @include big($i*1rem,$i*5deg);//up null
+//      }
+// } 
+.p1{
+   @include big(3rem);//up null
+}
+.p2{
+   @include big(2rem,true);//up true
+}
+.p3{
+   @include big(1rem,false);//up false
 }
 
-//nesting
-.main{
-
-@include flexCenter(row);
-// calc(80% - 400px) use this in css => but in sass cannot need calc and two para should be the same type two in % or two in px...
-    width  : 80% - 40%;
-    margin : 0 auto;
-
-    #{&}_paragraph1{
-        font-weight: weight(bold);
-        &:hover{
-            color: pink;
-        }
-    }
- //inheritance
-    #{&}_paragraph2 {
-
-        @extend .main_paragraph1;
-
-        //add some style
-        color: $accent-color;
-    }
-
-
-
-
-    @include mobile{
-        flex-direction:column ;
-    }
-}
- // & = to parent (.main)
- // {#} = interpolation  we want every thing before main_paragraph
- .light{
-    @include theme($light-theme:true);
-    //if i changed in false => back=gray
- }

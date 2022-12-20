@@ -4,35 +4,27 @@
   padding: 0;
 }
 
+html {
+  font-size: 16px;
+  line-height: 1.7;
+  font-family: "Courier New", Courier, monospace;
+}
+
 body {
-  background-color: rgb(62, 58, 58);
-  color: rgb(252, 252, 252);
+  padding: 2rem;
 }
 
-.main {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: row;
-  width: 40%;
-  margin: 0 auto;
-}
-.main .main_paragraph1, .main .main_paragraph2 {
-  font-weight: 700;
-}
-.main .main_paragraph1:hover, .main .main_paragraph2:hover {
-  color: pink;
-}
-.main .main_paragraph2 {
-  color: rgb(240, 18, 18);
-}
-@media (max-width: 800px) {
-  .main {
-    flex-direction: column;
-  }
+.p1 {
+  font-size: 3rem;
+  transform: rotate(2deg);
 }
 
-.light {
-  background: white;
-  color: black;
+.p2 {
+  font-size: 2rem;
+  transform: rotate(180deg);
+}
+
+.p3 {
+  font-size: 1rem;
+  transform: rotate(0deg);
 }/*# sourceMappingURL=main.css.map */
